@@ -26,7 +26,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 # Copy application code
 COPY backend/ ./backend/
-COPY frontend/build ./frontend/build
+COPY frontend/ ./frontend
 
 # Cloud Run sets PORT automatically (default: 8080)
 ENV PORT=8080
@@ -36,3 +36,4 @@ EXPOSE 8080
 
 # Start FastAPI with uvicorn
 CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
