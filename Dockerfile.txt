@@ -1,0 +1,30 @@
+# Step 1: Build React frontend
+FROM node:20-slim AS frontend-build
+WORKDIR /app
+COPY frontend/rca-agent-frontend/package*.json ./
+RUN npm install --production
+COPY frontend/rca-agent-frontend/ .
+RUN npm run build
+
+# Step 2: Build FastAPI backend with Python
+FROM python:3.11-slim
+WORKDIR /app
+
+# Install Python dependencies
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy backend code
+COPY backend/ ./backend/
+
+# Copy built frontend into backend
+COPY --from=frontend-build /app/build ./frontend/build
+
+# Set environment variables
+ENV PORT=8080
+
+# Expose Cloud Run port
+EXPOSE 8080
+
+# Run FastAPI app with Uvicorn
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8080"]

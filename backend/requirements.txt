@@ -1,0 +1,18 @@
+# Main application framework
+fastapi
+uvicorn[standard]
+
+# AI and Google Cloud
+google-generativeai
+google-cloud-storage
+
+# Vector Database
+chromadb
+
+# Data parsing and validation
+pydantic
+python-docx
+PyPDF2
+
+# For loading environment variables
+python-dotenv

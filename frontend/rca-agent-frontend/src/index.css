@@ -1,0 +1,353 @@
+/* src/index.css */
+:root {
+  --background: #f0f4f9;
+  --sidebar-bg: #e4eaf0;
+  --chat-bg: #ffffff;
+  --user-msg-bg: #d1e3ff;
+  --assistant-msg-bg: #f9f9f9;
+  --input-bg: #dde3ea;
+  --text-color: #1f1f1f;
+  --border-color: #d1d9e3;
+  --primary-color: #1a73e8;
+  --font-family: 'Google Sans', 'Roboto', sans-serif;
+  --code-bg: #282c34;
+  --code-color: #abb2bf;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background);
+  color: var(--text-color);
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+}
+
+.sidebar h1 {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+}
+
+.new-chat-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s;
+}
+
+.new-chat-btn:hover {
+  background-color: #1567d1;
+}
+
+.sessions-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.session-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.session-item:hover {
+  background-color: #d8dde4;
+}
+
+.session-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.chat-page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--chat-bg);
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 24px 40px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 800px;
+  margin: 0 auto 24px auto;
+  line-height: 1.6;
+}
+
+.message-header {
+  font-weight: bold;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.message-header span {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.user-header span { background-color: var(--user-msg-bg); }
+.assistant-header span { background-color: var(--primary-color); color: white; }
+
+.message-content {
+  padding-left: 44px; /* Align with header text */
+}
+
+/* Markdown styling */
+.message-content p { margin: 0 0 1em 0; }
+.message-content h1, .message-content h2, .message-content h3 { margin-top: 1.5em; margin-bottom: 0.5em; }
+.message-content ul, .message-content ol { padding-left: 20px; }
+.message-content pre {
+  background-color: var(--code-bg);
+  color: var(--code-color);
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: 'Fira Code', 'Courier New', monospace;
+}
+.message-content code {
+  background-color: var(--input-bg);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.message-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.chat-input-area {
+  padding: 24px 40px;
+  border-top: 1px solid var(--border-color);
+}
+
+.chat-input-form {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border-radius: 28px;
+  border: none;
+  background-color: var(--input-bg);
+  font-size: 16px;
+  font-family: inherit;
+  outline: none;
+}
+
+.send-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.send-btn:disabled {
+  background-color: #a0a0a0;
+  cursor: not-allowed;
+}
+
+.send-btn svg {
+  color: white;
+}
+
+.empty-chat {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+}
+
+.loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.session-item {
+  /* This turns the item into a flex container to align title and button */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Reset button-like styles from previous version if any */
+  width: auto;
+  text-align: left;
+  /* Add back other styles */
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 4px;
+  border: none;
+  background: none;
+}
+
+.session-title {
+  /* Allow the title to shrink to make room for the button */
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Add a little space between title and button */
+  margin-right: 8px;
+}
+
+.delete-session-btn {
+  /* Make the button transparent by default */
+  background: none;
+  border: none;
+  color: #5f6368;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Hide the button by default */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, background-color 0.2s;
+}
+
+/* Show the delete button when hovering over the session item */
+.session-item:hover .delete-session-btn {
+  opacity: 1;
+}
+
+.delete-session-btn:hover {
+  background-color: #c9ced4;
+}
+
+.session-item.active .delete-session-btn {
+  color: white; /* Make icon white on active background */
+}
+
+.session-item.active .delete-session-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Add a hover effect for the active item */
+}
+
+.session-actions {
+  display: flex;
+  align-items: center;
+  /* Hide actions by default */
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none; /* Prevent clicks when hidden */
+}
+
+.session-item:hover .session-actions {
+  /* Show actions on hover */
+  opacity: 1;
+  pointer-events: auto; /* Allow clicks when visible */
+}
+
+.session-action-btn {
+  background: none;
+  border: none;
+  color: #5f6368;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+}
+
+.session-action-btn:hover {
+  background-color: #c9ced4;
+}
+
+.session-item.active .session-action-btn {
+  color: white;
+}
+
+.session-item.active .session-action-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Styles for the editing input */
+.session-edit-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.session-edit-input {
+  flex-grow: 1;
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+.session-edit-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 4px;
+  color: var(--text-color);
+}
