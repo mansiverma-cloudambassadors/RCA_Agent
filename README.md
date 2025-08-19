@@ -153,8 +153,3 @@ Before you begin, ensure you have the following installed on your local machine:
 4. **Deploy** → Cloud Build will build + deploy automatically.
 
 Your service will get a **public URL**, and every push to `main` will trigger redeployment 🚀
-
----
-
-Would you like me to also **add badges** (like build passing, deploy to Cloud Run, made with Python/React) at the top so the README looks more professional for GitHub?
-
