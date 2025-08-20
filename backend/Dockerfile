@@ -35,9 +35,9 @@ COPY . .
 
 # Tell Docker that your application listens on port 8000
 # Cloud Run will automatically use the $PORT environment variable.
-EXPOSE 8000
+EXPOSE 8080
 
 # The command to run your application
 # Uses the $PORT variable provided by Cloud Run for flexibility.
 # --host 0.0.0.0 is crucial to make the app accessible from outside the container.
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
