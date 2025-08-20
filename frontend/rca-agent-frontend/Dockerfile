@@ -2,9 +2,13 @@
 FROM node:18 as builder
 
 WORKDIR /app
-COPY frontend/rca-agent-frontend/package*.json ./
+
+# Copy only package files first (better caching)
+COPY package*.json ./
 RUN npm install
-COPY frontend/ .
+
+# Copy the rest of the project
+COPY . .
 RUN npm run build
 
 # Stage 2: Serve React build
@@ -18,4 +22,3 @@ ENV PORT=8080
 EXPOSE 8080
 
 CMD ["serve", "-s", "build", "-l", "8080"]
-
