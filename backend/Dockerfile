@@ -20,8 +20,5 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 COPY . .
 
-# Expose port (Cloud Run ignores this, but good practice)
-EXPOSE 8080
-
 # Use $PORT environment variable (set by Cloud Run)
 CMD exec uvicorn main:app --host 0.0.0.0 --port ${PORT}
