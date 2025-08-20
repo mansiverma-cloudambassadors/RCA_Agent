@@ -21,5 +21,6 @@ COPY --from=builder /app/build ./build
 ENV PORT=${PORT}
 EXPOSE ${PORT}
 
-CMD ["serve", "-s", "build", "-l", ${PORT}]
+CMD ["serve", "-s", "build", "-l", "${PORT}"]
+
 
