@@ -2,7 +2,7 @@
 FROM node:18 as builder
 
 WORKDIR /app
-COPY frontend/package*.json ./
+COPY frontend/rca-agent-frontend/package*.json ./
 RUN npm install
 COPY frontend/ .
 RUN npm run build
@@ -18,3 +18,4 @@ ENV PORT=8080
 EXPOSE 8080
 
 CMD ["serve", "-s", "build", "-l", "8080"]
+
